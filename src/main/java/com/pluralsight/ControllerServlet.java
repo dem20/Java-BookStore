@@ -122,14 +122,14 @@ public class ControllerServlet extends HttpServlet {
 			response.sendRedirect("list");
 		}
 
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-			int id = Integer.parseInt(request.getParameter("id"));
-			Book existingBook = bookDAO.getBook(id);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/BookForm.jsp");
-			request.setAttribute("book", existingBook);
-			dispatcher.forward(request, response);
-		}
+//	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+//		throws ServletException, IOException {
+//			int id = Integer.parseInt(request.getParameter("id"));
+//			Book existingBook = bookDAO.getBook(id);
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/BookForm.jsp");
+//			request.setAttribute("book", existingBook);
+//			dispatcher.forward(request, response);
+//		}
 
 	private void updateBook(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
@@ -143,6 +143,15 @@ public class ControllerServlet extends HttpServlet {
 			bookDAO.updateBook(newBook);
 			response.sendRedirect("list");
 		}
+	
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) 
+		throws ServletException, IOException{
+		int id = Integer.parseInt(request.getParameter("id"));
+		Book book = bookDAO.getBook(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookForm.jsp");
+		request.setAttribute("book", book);
+		dispatcher.forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
